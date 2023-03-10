@@ -1,0 +1,73 @@
+swagger: '2.0'
+info:
+  title: Flask API
+  description: Swagger specification for Flask API
+  version: '1.0'
+basePath: /
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /server:
+    get:
+      description: Returns a simple message indicating that the server works.
+      responses:
+        200:
+          description: OK
+          schema:
+            type: string
+  /AddEmployee:
+    post:
+      description: Adds an employee with a name parameter.
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              Name:
+                type: string
+          required: true
+      responses:
+        201:
+          description: Created
+          schema:
+            type: object
+            properties:
+              Name:
+                type: string
+  /UpdateEmployee:
+    put:
+      description: Updates an employee's name.
+      parameters:
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              Name:
+                type: string
+          required: true
+      responses:
+        201:
+          description: OK
+          schema:
+            type: object
+            properties:
+              Name:
+                type: string
+  /GetAllEmployee:
+    get:
+      description: Returns a JSON object containing a list of employees.
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              User:
+                type: string

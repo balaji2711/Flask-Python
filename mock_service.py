@@ -1,9 +1,23 @@
 from flask import Flask
-
 from utils import Utils
+from flask_swagger_ui import get_swaggerui_blueprint
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
+SWAGGER_URL = '/swagger'
+API_URL = '/static/swagger.yaml'
+
+swagger_ui_blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name': "My Flask App"
+    }
+)
+
+app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)
 
 @app.route("/server")
 def index():
@@ -26,4 +40,4 @@ def get_all_employee():
 
 
 ipaddress = Utils.get_current_ip_address()
-app.run(host=ipaddress)
+app.run(host=ipaddress, debug=True)
